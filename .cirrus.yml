@@ -28,6 +28,8 @@ task:
     - cd PcapPlusPlus
     - make all
   build_documentation_script:
+    - pwd
+    - ls -la
     - cd pcapplusplus.github.io/api-docs/doxygen
     - doxygen Doxyfile-ci
   replace_documentation_script:
