@@ -13,3 +13,24 @@ task:
   test_script:
     - cd Tests/Packet++Test && Bin/Packet++Test
     - cd ../Pcap++Test && sudo Bin/Pcap++Test -n
+
+task:
+  name: Build Doxygen Documentation
+  container:
+    image: seladb/ubuntu1804:latest
+  get_code_script: 
+    - git clone https://github.com/seladb/PcapPlusPlus.git
+    - git clone https://github.com/PcapPlusPlus/pcapplusplus.github.io.git
+  configure_script:
+    - cd PcapPlusPlus
+    - ./configure-linux.sh --default
+  build_script: 
+    - cd PcapPlusPlus
+    - make all
+  build_documentation_script:
+    - cd pcapplusplus.github.io/api-docs/doxygen
+    - doxygen Doxyfile-ci
+  replace_documentation_script:
+    - rm pcapplusplus.github.io/api-docs/*
+    - rm -rf pcapplusplus.github.io/api-docs/search/
+    - mv pcapplusplus.github.io/api-docs/html/* pcapplusplus.github.io/api-docs/
