@@ -38,3 +38,5 @@ task:
     - mv pcapplusplus.github.io/api-docs/html/* pcapplusplus.github.io/api-docs/
     - cd pcapplusplus.github.io/api-docs/
     - git status
+  deploy_package_artifacts:
+    path: "pcapplusplus.github.io/api-docs/*"
