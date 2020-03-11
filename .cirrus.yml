@@ -30,8 +30,8 @@ task:
   build_documentation_script:
     - cd pcapplusplus.github.io/api-docs/doxygen
     - doxygen Doxyfile-ci
-  replace_documentation_script:
-    if [ "$CIRRUS_BRANCH" -eq "master" ]; then
+  replace_documentation_script: |
+    if [ "$CIRRUS_BRANCH" == "master" ]; then
       find pcapplusplus.github.io/api-docs/ -maxdepth 1 -type f -exec rm {} \;
       rm -rf pcapplusplus.github.io/api-docs/search/
       mv pcapplusplus.github.io/api-docs/html/* pcapplusplus.github.io/api-docs/
