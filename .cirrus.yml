@@ -28,15 +28,15 @@ task:
     - cd PcapPlusPlus
     - make all
   build_documentation_script:
-    - pwd
-    - ls -la
     - cd pcapplusplus.github.io/api-docs/doxygen
     - doxygen Doxyfile-ci
   replace_documentation_script:
-    - find pcapplusplus.github.io/api-docs/ -maxdepth 1 -type f -exec rm {} \;
-    - rm -rf pcapplusplus.github.io/api-docs/search/
-    - mv pcapplusplus.github.io/api-docs/html/* pcapplusplus.github.io/api-docs/
-    - cd pcapplusplus.github.io/api-docs/
-    - git status
+    if [ "$CIRRUS_BRANCH" -eq "master" ]; then
+      find pcapplusplus.github.io/api-docs/ -maxdepth 1 -type f -exec rm {} \;
+      rm -rf pcapplusplus.github.io/api-docs/search/
+      mv pcapplusplus.github.io/api-docs/html/* pcapplusplus.github.io/api-docs/
+      cd pcapplusplus.github.io/api-docs/
+      git add .
+    fi
   deploy_package_artifacts:
     path: "pcapplusplus.github.io/api-docs/**"
