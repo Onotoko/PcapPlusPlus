@@ -39,4 +39,4 @@ task:
     - cd pcapplusplus.github.io/api-docs/
     - git status
   deploy_package_artifacts:
-    path: "pcapplusplus.github.io/api-docs/*"
+    path: "pcapplusplus.github.io/api-docs/**"
